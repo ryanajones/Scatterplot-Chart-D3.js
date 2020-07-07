@@ -21,7 +21,7 @@ body {
 }
 
 #title p {
- color: #E7FE50;
+  color: #e7fe50;
 }
 
 .chart-container {
@@ -35,3 +35,8 @@ body {
   height: 560px;
   background-color: rgb(148, 44, 44);
 }
+
+/* .chart { 
+  width: 800;
+  height: 400;
+} */

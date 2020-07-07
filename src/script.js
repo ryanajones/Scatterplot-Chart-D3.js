@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 const w = 800;
-const h = 400;
+const h = 500;
 const padding = 60;
 
 d3.json(
@@ -16,6 +16,10 @@ d3.json(
   });
   const time = [years, minutes];
 
+  // Parse time
+  const specifier = '%M:%S';
+  const parsedData = minutes.map((d) => d3.timeParse(specifier)(d));
+
   const svgContainer = d3
     .select('.chart')
     .append('svg')
@@ -24,15 +28,15 @@ d3.json(
 
   // xScale
   const xScale = d3
-    .scaleTime()
+    .scaleLinear()
     .domain([d3.min(years), d3.max(years)])
-    .range(padding, w - padding);
+    .range([0, w]);
 
   // yScale
   const yScale = d3
     .scaleTime()
-    .domain([d3.min(minutes), d3.max(minutes)])
-    .range(h - padding, padding);
+    .domain(d3.extent(parsedData).reverse())
+    .range([h - padding, padding]);
 
   // SVG
   d3.select('svg')
@@ -40,20 +44,25 @@ d3.json(
     .data(time)
     .enter()
     .append('circle')
+    .attr('class', 'dot')
     .attr('cx', (d, i) => xScale(d[0][i]))
     .attr('cy', (d, i) => yScale(d[1][i]))
     .attr('r', (d) => 5);
 
   // Bottom axis
-  const xAxis = d3.axisBottom(xScale);
+  const xAxis = d3.axisBottom().scale(xScale);
   d3.select('svg')
     .append('g')
     .call(xAxis)
-    .attr('transform', 'translate(60,400)')
+    .attr('transform', 'translate(60, 340)')
     .attr('id', 'x-axis');
 
   // Left axis
-  const yAxis = d3.axisLeft(yScale);
+  const yAxis = d3
+    .axisLeft(yScale)
+    .ticks(d3.timeSecond.every(15))
+    .tickFormat((d) => d3.timeFormat(specifier)(d));
+
   d3.select('svg')
     .append('g')
     .call(yAxis)
