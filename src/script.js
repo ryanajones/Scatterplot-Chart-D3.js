@@ -29,32 +29,32 @@ d3.json(
   // xScale
   const xScale = d3
     .scaleLinear()
-    .domain([d3.min(years), d3.max(years)])
+    .domain([d3.min(years) - 1, d3.max(years) + 1])
     .range([0, w]);
 
   // yScale
   const yScale = d3
     .scaleTime()
-    .domain(d3.extent(parsedData).reverse())
+    .domain(d3.extent(parsedData))
     .range([h - padding, padding]);
 
   // SVG
   d3.select('svg')
     .selectAll('circle')
-    .data(time)
+    .data(data)
     .enter()
     .append('circle')
     .attr('class', 'dot')
-    .attr('cx', (d, i) => xScale(d[0][i]))
-    .attr('cy', (d, i) => yScale(d[1][i]))
+    .attr('cx', (d) => xScale(d.Year))
+    .attr('cy', (d) => yScale(d.Time))
     .attr('r', (d) => 5);
 
   // Bottom axis
-  const xAxis = d3.axisBottom().scale(xScale);
+  const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('R'));
   d3.select('svg')
     .append('g')
     .call(xAxis)
-    .attr('transform', 'translate(60, 340)')
+    .attr('transform', 'translate(60, 440)')
     .attr('id', 'x-axis');
 
   // Left axis
@@ -67,5 +67,6 @@ d3.json(
     .append('g')
     .call(yAxis)
     .attr('transform', 'translate(60,0)')
-    .attr('id', 'y-axis');
+    .attr('id', 'y-axis')
+    .attr('class', 'y axis');
 });
