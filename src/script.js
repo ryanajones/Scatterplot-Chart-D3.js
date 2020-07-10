@@ -15,7 +15,7 @@ d3.json(
     minutes.push(currentItem.Time);
   });
   const time = [years, minutes];
-
+d
   // Parse time
   const specifier = '%M:%S';
   const parsedData = minutes.map((d) => d3.timeParse(specifier)(d));
