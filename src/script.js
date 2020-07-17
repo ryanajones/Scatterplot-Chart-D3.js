@@ -4,6 +4,7 @@
 const w = 800;
 const h = 500;
 const padding = 60;
+const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 const tooltip = d3
   .select('.chart')
@@ -45,7 +46,7 @@ d3.json(
     .range([padding, h - padding]);
 
   // SVG
-  d3.select('svg')
+  svgContainer
     .selectAll('circle')
     .data(data)
     .enter()
@@ -53,13 +54,20 @@ d3.json(
     .attr('class', 'dot')
     .attr('cx', (d, i) => xScale(years[i]))
     .attr('cy', (d, i) => yScale(parsedData[i]))
-    .attr('r', (d) => 5)
+    .attr('r', (d) => 6)
     .attr('data-xvalue', (d, i) => years[i])
     .attr('data-yvalue', (d, i) => parsedData[i])
+    .style('fill', (d, i) => color(data[i].Doping !== ''))
     .on('mouseover', (d, i) => {
       tooltip.transition().duration(200).style('opacity', 0.9);
       tooltip
-        .html(`hello`)
+        .html(
+          `${data[i].Name}: ${data[i].Nationality}<br> Year: ${
+            data[i].Year
+          }, Time: ${data[i].Time} ${
+            data[i].Doping ? `<br><br>${data[i].Doping}` : ''
+          }`
+        )
         .attr('data-year', years[i])
         .style('left', `${xScale(years[i]) + 57}px`)
         .style('top', `${yScale(parsedData[i]) + 40}px`);
@@ -70,7 +78,7 @@ d3.json(
 
   // Bottom axis
   const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('R'));
-  d3.select('svg')
+  svgContainer
     .append('g')
     .call(xAxis)
     .attr('transform', 'translate(0, 440)')
@@ -82,10 +90,41 @@ d3.json(
     .ticks(d3.timeSecond.every(15))
     .tickFormat((d) => d3.timeFormat(specifier)(d));
 
-  d3.select('svg')
+  svgContainer
     .append('g')
     .call(yAxis)
     .attr('transform', 'translate(60,0)')
     .attr('id', 'y-axis')
     .attr('class', 'y axis');
+
+  // Legend
+  const legendContainer = svgContainer.append('g').attr('id', 'legend');
+
+  const legend = legendContainer
+    .selectAll('#legend')
+    .data(color.domain())
+    .enter()
+    .append('g')
+    .attr('class', 'legend-label')
+    .attr('transform', (d, i) => `translate(0,${h / 2 - i * 25})`);
+
+  legend
+    .append('rect')
+    .attr('x', w - 90)
+    .attr('width', 18)
+    .attr('height', 18)
+    .style('fill', color);
+
+  legend
+    .append('text')
+    .attr('x', w - 95)
+    .attr('y', 9)
+    .attr('dy', '.35em')
+    .style('fill', 'white')
+    .style('text-anchor', 'end')
+    .text(function (d) {
+      if (d) return 'Riders with doping allegations';
+
+      return 'No doping allegations';
+    });
 });
