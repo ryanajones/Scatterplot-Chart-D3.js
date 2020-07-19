@@ -1,10 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
+/* 
+See about widening svg width for Time in Minutes text without changing scale. 
+Search into @fontface and get a better font weight for title. 
+ 
+*/
+
 const w = 800;
 const h = 500;
 const padding = 60;
-const color = d3.scaleOrdinal(d3.schemeCategory10);
+const color = d3.scaleOrdinal(['#7369D8', '#FE5A5E']);
 
 const tooltip = d3
   .select('.chart')
@@ -57,6 +63,7 @@ d3.json(
     .attr('r', (d) => 6)
     .attr('data-xvalue', (d, i) => years[i])
     .attr('data-yvalue', (d, i) => parsedData[i])
+    .attr('transform', 'translate(0, 20)')
     .style('fill', (d, i) => color(data[i].Doping !== ''))
     .on('mouseover', (d, i) => {
       tooltip.transition().duration(200).style('opacity', 0.9);
@@ -70,7 +77,7 @@ d3.json(
         )
         .attr('data-year', years[i])
         .style('left', `${xScale(years[i]) + 57}px`)
-        .style('top', `${yScale(parsedData[i]) + 40}px`);
+        .style('top', `${yScale(parsedData[i]) + 20}px`);
     })
     .on('mouseout', () => {
       tooltip.transition().duration(200).style('opacity', 0);
@@ -81,7 +88,7 @@ d3.json(
   svgContainer
     .append('g')
     .call(xAxis)
-    .attr('transform', 'translate(0, 440)')
+    .attr('transform', 'translate(0, 460)')
     .attr('id', 'x-axis');
 
   // Left axis
@@ -93,9 +100,52 @@ d3.json(
   svgContainer
     .append('g')
     .call(yAxis)
-    .attr('transform', 'translate(60,0)')
+    .attr('transform', 'translate(60,20)')
     .attr('id', 'y-axis')
     .attr('class', 'y axis');
+
+  // Title text
+  svgContainer
+    .append('text')
+    .attr('id', 'title')
+    .attr('x', 150)
+    .attr('y', 27)
+    .text('Doping in Professional Bicycle Racing')
+    .style('fill', 'white');
+
+  svgContainer
+    .append('text')
+    .attr('id', 'sub-title')
+    .attr('x', 310)
+    .attr('y', 50)
+    .text("35 Fastest times up Alpe d'Huez");
+
+  svgContainer
+    .append('g')
+    .append('rect')
+    .attr('class', 'font-awesome-wrapper')
+    .attr('x', 90)
+    .attr('width', 35)
+    .attr('height', 35)
+    .attr('ry', 9);
+
+  svgContainer
+    .append('text')
+    .attr('class', 'fa fa-2x')
+    .attr('x', 95)
+    .attr('y', 25)
+    .style('fill', '#dde1e5')
+    .style('background', 'blue')
+    .text('\uf206');
+
+  svgContainer
+    .append('text')
+    .attr('x', -315)
+    .attr('y', 14)
+    .attr('transform', 'rotate(-90)')
+    .style('font-size', '1.4em')
+    .style('fill', '#dde1e5')
+    .text('Time in Minutes');
 
   // Legend
   const legendContainer = svgContainer.append('g').attr('id', 'legend');
@@ -106,21 +156,23 @@ d3.json(
     .enter()
     .append('g')
     .attr('class', 'legend-label')
-    .attr('transform', (d, i) => `translate(0,${h / 2 - i * 25})`);
+    .attr('transform', (d, i) => `translate(0,${h / 2 - i * 29})`);
 
   legend
     .append('rect')
     .attr('x', w - 90)
-    .attr('width', 18)
-    .attr('height', 18)
+    .attr('y', 30)
+    .attr('width', 25)
+    .attr('height', 25)
+    .attr('ry', '9')
     .style('fill', color);
 
   legend
     .append('text')
     .attr('x', w - 95)
-    .attr('y', 9)
+    .attr('y', 42)
     .attr('dy', '.35em')
-    .style('fill', 'white')
+    .style('fill', '#dde1e5')
     .style('text-anchor', 'end')
     .text(function (d) {
       if (d) return 'Riders with doping allegations';

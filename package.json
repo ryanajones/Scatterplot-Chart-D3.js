@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "scripts.js",
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0"
+  },
   "devDependencies": {
     "@abhijithvijayan/eslint-config": "^1.4.1",
     "@typescript-eslint/eslint-plugin": "^2.34.0",

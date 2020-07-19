@@ -9,17 +9,89 @@ body {
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  color: white;
-  background-color: #660000;
-}
-
-#title h2 {
-  font-size: 2rem;
-  font-weight: 350;
-}
-
-#title p {
-  color: #e7fe50;
+  color: #dde1e5;
+  background-image: radial-gradient(
+      circle at 29% 55%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 4%,
+      transparent 4%,
+      transparent 44%,
+      transparent 44%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 85% 89%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 51%,
+      transparent 51%,
+      transparent 52%,
+      transparent 52%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 6% 90%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 53%,
+      transparent 53%,
+      transparent 64%,
+      transparent 64%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 35% 75%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 6%,
+      transparent 6%,
+      transparent 98%,
+      transparent 98%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 56% 75%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 16%,
+      transparent 16%,
+      transparent 23%,
+      transparent 23%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 42% 0%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 3%,
+      transparent 3%,
+      transparent 26%,
+      transparent 26%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 29% 28%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 51%,
+      transparent 51%,
+      transparent 75%,
+      transparent 75%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 77% 21%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 35%,
+      transparent 35%,
+      transparent 55%,
+      transparent 55%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 65% 91%,
+      hsla(329, 0%, 99%, 0.05) 0%,
+      hsla(329, 0%, 99%, 0.05) 46%,
+      transparent 46%,
+      transparent 76%,
+      transparent 76%,
+      transparent 100%
+    ),
+    linear-gradient(45deg, rgb(83, 91, 235), #7c74cb);
 }
 
 .chart-container {
@@ -27,34 +99,43 @@ body {
   top: 100px;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 900px;
   height: 560px;
-  border-radius: 5px;
-  text-align: center;
-  background-color: rgb(148, 44, 44);
+  border-radius: 35px;
+  background-color: #2f3241;
 }
 
+
+.font-awesome-wrapper {
+  fill: black;
+}
+
+#title {
+  font-size: 2.8rem;
+  font-weight: 350;
+}
+#sub-title {
+  fill: #b8bac2;
+}
 .axis path,
 .axis line {
   fill: none;
   shape-rendering: crispEdges;
 }
 
-#legend {
-
+.dot {
+  stroke: rgb(51, 51, 51);
+  opacity: 0.7;
 }
+
 #tooltip {
   position: absolute;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: left;
   color: white;
-  background-color: black;
+  background-color: #232531;
   pointer-events: none;
 }
-
-/* .chart { 
-  width: 800;
-  height: 400;
-} */
