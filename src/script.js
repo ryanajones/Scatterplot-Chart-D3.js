@@ -1,12 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-/* 
-See about widening svg width for Time in Minutes text without changing scale. 
-Search into @fontface and get a better font weight for title. 
- 
-*/
-
 const w = 800;
 const h = 500;
 const padding = 60;
