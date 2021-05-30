@@ -9,3 +9,7 @@ HTML CSS JavaScript D3.js
 ## CodePen Link
 
 https://codepen.io/ryanajones/full/ZEQwLvx
+
+## Screenshot
+
+![alt text](https://i.imgur.com/c5AU61a.png)
