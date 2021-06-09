@@ -1,6 +1,6 @@
 # Scatterplot Chart D3.js
 
-> A scatterplot chart data visualization project using D3.js library. D3.js takes JSON data and visualizes the correlation of doping and 35 fastest times going up Alpe d'Huez in professional bicycle racing.
+A scatterplot chart data visualization project using D3.js library. D3.js takes JSON data and visualizes the correlation of doping and the 35 fastest times going up Alpe d'Huez in professional bicycle racing.
 
 ## Technologies Used
 
